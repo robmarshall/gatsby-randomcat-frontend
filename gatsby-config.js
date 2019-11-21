@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
+    title: `Gatsby Source RandomCat Example`,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
   },
@@ -11,8 +11,8 @@ module.exports = {
     {
       resolve: "gatsby-source-randomcat",
       options: {
-        api: "a5d3ce41-1f54-4145-b630-6ce2c2afc736",
-        limit: "1000",
+        api: "",
+        limit: "100",
       },
     },
   ],

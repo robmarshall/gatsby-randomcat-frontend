@@ -1,30 +1,33 @@
 import React from "react"
-import { Link, useStaticQuery, graphql } from "gatsby"
-import GravityFormForm from "gatsby-gravityforms-component"
-
-import { AllGravityData } from "../GfQuery"
-
+import { useStaticQuery, graphql } from 'gatsby'
 import Layout from "../components/layout"
-import Image from "../components/image"
-import SEO from "../components/seo"
 
 const IndexPage = () => {
-  const formData = AllGravityData()
+
+  const { allRandomCat } = useStaticQuery(
+    graphql`
+      query {
+        allRandomCat {
+          nodes {
+            id
+            url
+            width
+            height
+          }
+        }
+      }
+    `
+  )
+
   return (
     <Layout>
-      <SEO title="Home" />
-      <h1>Hi people</h1>
-      <p>Im just testing Gravity Forms</p>
-      <GravityFormForm
-        id={4}
-        formData={formData}
-        lambda={process.env.GATSBY_LAMBDA_ENDPOINT}
-      />
-      <p>Now go build something great.</p>
-      <div style={{ maxWidth: `300px`, marginBottom: `1.45rem` }}>
-        <Image />
-      </div>
-      <Link to="/page-2/">Go to page 2</Link>
+      {
+        allRandomCat.nodes.map(img => {
+          return (
+            <img style={{float: 'left'}}key={img.id} src={img.url} width={img.width ? `${img.width}px` : null} height={img.height ? `${img.height}px` : null} alt="" />
+          )
+        })
+      }
     </Layout>
   )
 }
